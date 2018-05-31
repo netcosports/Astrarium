@@ -8,37 +8,13 @@
 import UIKit
 import UserNotifications
 
-public class ServiceIds {
-
-  fileprivate let key: String
-
-  fileprivate init(key: String) {
-    self.key = key
-  }
-
-  fileprivate func instanciateService() -> AppService {
-    fatalError("Abstract method. Should not be called directly")
-  }
-}
-
-public class ServiceIdentifier<T: AppService>: ServiceIds {
-
-  public convenience init() {
-    self.init(key: "\(T.self)")
-  }
-
-  override public func instanciateService() -> AppService {
-    return T.init()
-  }
-}
-
 final public class Dispatcher: NSObject {
 
-  private let identifiers: [ServiceIds]
-  private var initializedServices = [String: AppService]()
+  internal let identifiers: [ServiceIds]
+  internal var initializedServices = [String: AppService]()
 
-  private lazy var allServices: [AppService] = identifiers
-    .compactMap { _service(for: $0) }
+  internal lazy var allServices: [AppService] = identifiers
+    .compactMap { internalService(for: $0) }
 
   // MARK: - Shared
 
@@ -59,15 +35,12 @@ final public class Dispatcher: NSObject {
   required public init(services: [ServiceIds?]) {
     identifiers = services.compactMap { $0 }
     super.init()
-    if #available(iOS 10.0, *) {
-      UNUserNotificationCenter.current().delegate = self
-    }
   }
 
   // MARK: - Public
 
   public func service<T: AppService>(for identifier: ServiceIdentifier<T>) -> T? {
-    return _service(for: identifier) as? T
+    return internalService(for: identifier) as? T
   }
 
   public subscript<T: AppService>(identifier: ServiceIdentifier<T>) -> T {
@@ -82,11 +55,11 @@ final public class Dispatcher: NSObject {
   }
 }
 
-// MARK: - Private
+// MARK: - Internal
 
-private extension Dispatcher {
+extension Dispatcher {
 
-  func _service(for identifier: ServiceIds) -> AppService? {
+  func internalService(for identifier: ServiceIds) -> AppService? {
     if let service = initializedServices[identifier.key] {
       return service
     }
@@ -97,78 +70,4 @@ private extension Dispatcher {
     }
     return nil
   }
-}
-
-// MARK: - UIApplicationDelegate
-
-extension Dispatcher: UIApplicationDelegate {
-
-  @discardableResult
-  public func application(_ application: UIApplication,
-                          willFinishLaunchingWithOptions launchOptions: LaunchOptions? = nil) -> Bool {
-    allServices.filter { $0.shouldSetupEarly }
-      .forEach { $0.setup(with: launchOptions ?? [:]) }
-    allServices.forEach { $0.applicationWillFinishLaunch(with: launchOptions) }
-    return true
-  }
-
-  @discardableResult
-  public func application(_ application: UIApplication,
-                          didFinishLaunchingWithOptions launchOptions: LaunchOptions?) -> Bool {
-    allServices.filter { !$0.shouldSetupEarly }
-      .forEach { $0.setup(with: launchOptions ?? [:]) }
-    allServices.forEach { $0.applicationDidFinishLaunch(with: launchOptions) }
-    return true
-  }
-
-  public func applicationDidBecomeActive(_ application: UIApplication) {
-    allServices.forEach { $0.applicationDidBecomeActive() }
-  }
-
-  public func applicationWillResignActive(_ application: UIApplication) {
-    allServices.forEach { $0.applicationWillResignActive() }
-  }
-
-  public func applicationWillEnterForeground(_ application: UIApplication) {
-    allServices.forEach { $0.applicationWillEnterForeground() }
-  }
-
-  public func applicationDidEnterBackground(_ application: UIApplication) {
-    allServices.forEach { $0.applicationDidEnterBackground() }
-  }
-
-  public func application(_ app: UIApplication, open url: URL, options: OpenURLOptions = [:]) -> Bool {
-    for service in allServices {
-      if service.application(app, open: url, options: options) {
-        return true
-      }
-    }
-    return false
-  }
-
-  public func applicationWillTerminate(_ application: UIApplication) {
-    allServices.forEach { $0.applicationWillTerminate() }
-  }
-}
-
-// MARK: - UNUserNotificationCenterDelegate
-
-@available(iOS 10.0, *)
-extension Dispatcher: UNUserNotificationCenterDelegate {
-
-  public func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse,
-                                     withCompletionHandler completionHandler: @escaping () -> Void) {
-    allServices.forEach {
-      $0.userNotificationCenter(center, didReceive: response, withCompletionHandler: completionHandler)
-    }
-  }
-
-  //swiftlint:disable line_length
-  public func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification,
-                                     withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-    allServices.forEach {
-      $0.userNotificationCenter(center, willPresent: notification, withCompletionHandler: completionHandler)
-    }
-  }
-  //swiftlint:enable line_length
 }

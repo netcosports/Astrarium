@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name = 'Astrarium'
-  s.version = '0.0.1'
+  s.version = '0.0.2'
   s.summary = 'Services management library'
 
   s.homepage = 'https://github.com/netcosports/Astrarium'
@@ -10,9 +10,7 @@ Pod::Spec.new do |s|
   }
   s.source = { :git => 'https://github.com/netcosports/Astrarium.git', :tag => s.version.to_s }
 
-  s.framework = "UIKit"
-  s.framework = "Foundation"
-  s.framework = "UserNotifications"
+  s.framework = ["UIKit", "Foundation", "UserNotifications", "CloudKit", "Intents"]
 
   s.ios.deployment_target = '9.0'
 
@@ -21,4 +19,20 @@ Pod::Spec.new do |s|
   s.subspec 'Core' do |sub|
     sub.source_files = 'Sources/Core/*.swift'
   end
+
+  s.subspec 'CloudKit' do |sub|
+    sub.source_files = 'Sources/CloudKit/*.swift'
+    sub.dependency 'Astrarium/Core'
+  end
+
+  s.subspec 'UserNotifications' do |sub|
+    sub.source_files = 'Sources/UserNotifications/*.swift'
+    sub.dependency 'Astrarium/Core'
+  end
+
+  s.subspec 'Intents' do |sub|
+    sub.source_files = 'Sources/Intents/*.swift'
+    sub.dependency 'Astrarium/Core'
+  end
+
 end

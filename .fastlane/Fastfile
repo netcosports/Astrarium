@@ -1,0 +1,91 @@
+sources = ['git@github.com:netcosports/NSTPodsSpecs', 'git@github.com:CocoaPods/Specs']
+
+# lane :test do
+#   scan(scheme: 'iOS-Tests', device: 'iPhone 7')
+#   scan(scheme: 'tvOS-Tests')
+# end
+
+lane :release do |options|
+  bump = options[:bump]
+  bump ||= 'patch'
+  new_version(type: bump, increase: true, path: podspec)
+  tag(message: '')
+  push
+end
+
+lane :patch do |options|
+  new_version(type: 'patch', increase: true, path: podspec)
+end
+
+lane :minor do |options|
+  new_version(type: 'minor', increase: true, path: podspec)
+end
+
+lane :major do |options|
+  new_version(type: 'major', increase: true, path: podspec)
+end
+
+private_lane :new_version do |options|
+  if options[:version]
+    version_bump_podspec(
+      path: options[:path],
+      version_number: options[:version]
+    )
+  else
+    type = options[:type] ? options[:type] : 'patch'
+    version_bump_podspec(
+      path: options[:path],
+      bump_type: type
+    )
+  end
+
+  if options[:increase]
+    message = "Increased #{options[:path]} version #{lane_context[SharedValues::PODSPEC_VERSION_NUMBER]}"
+  else
+    message = "Changed #{options[:path]} version #{lane_context[SharedValues::PODSPEC_VERSION_NUMBER]}"
+  end
+
+  git_commit(
+    path: options[:path],
+    message: message
+  )
+end
+
+lane :lib_lint do |options|
+  pod_lib_lint(
+    path: podspec,
+    private: true,
+    verbose: true,
+    sources: sources
+  )
+end
+
+lane :spec_lint do |options|
+  pod_spec_lint(
+    path: podspec,
+    private: true,
+    verbose: true,
+    sources: sources
+  )
+end
+
+lane :push do |options|
+  pod_push(
+    path: podspec,
+    repo: 'NSTPodsSpecs',
+    sources: sources
+  )
+end
+
+lane :tag do |options|
+  message = options[:message]
+  message ||= UI.input("Enter release message: ")
+  version = version_get_podspec(path: podspec)
+
+  sh("git tag -am '#{message}' '#{version}'")
+  sh("git push --tags")
+end
+
+private_lane :podspec do
+  'Astrarium.podspec'
+end
