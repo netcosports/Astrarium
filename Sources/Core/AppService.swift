@@ -7,6 +7,11 @@
 import UIKit
 import UserNotifications
 
+public enum Notification {
+  case local(UILocalNotification)
+  case remote(UserInfo)
+}
+
 public protocol AppService: ServiceInitiable {
 
   /// will call setup in willFinishLaunch if 'true',
@@ -15,280 +20,263 @@ public protocol AppService: ServiceInitiable {
 
   func setup(with launchOptions: LaunchOptions)
 
-  func applicationWillFinishLaunch(with options: LaunchOptions?)
+  func appWillFinishLaunch(with options: LaunchOptions?)
 
-  func applicationDidFinishLaunch(with options: LaunchOptions?)
+  func appDidFinishLaunch(with options: LaunchOptions?)
 
-  func applicationDidBecomeActive()
+  func appDidBecomeActive()
 
-  func applicationWillResignActive()
+  func appWillResignActive()
 
-  func applicationWillEnterForeground()
+  func appWillEnterForeground()
 
-  func applicationDidEnterBackground()
+  func appDidEnterBackground()
 
-  func applicationWillTerminate()
+  func appWillTerminate()
 
   func appDidReceiveMemoryWarning()
 
   func appSignificantTimeChange()
 
+  // MARK: - App Orientation
+
+  func appInterfaceOrientationMask(for window: UIWindow?) -> UIInterfaceOrientationMask
+
+  // MARK: - URLs
+
+  func shouldAppOpen(url: URL, options: OpenURLOptions) -> Bool
+
+  // MARK: - Status bar
+  // MARK: Orientation
+
+  func appWillChangeStatusBarOrientation(to new: UIInterfaceOrientation, duration: TimeInterval)
+
+  func appDidChangeStatusBarOrientation(from old: UIInterfaceOrientation)
+
+  // MARK: Frame
+
+  func appWillChangeStatusBarFrame(to new: CGRect)
+
+  func appDidChangeStatusBarFrame(from old: CGRect)
+
+  // MARK: - Notifications
+
+  //swiftlint:disable line_length
+
+  @available(iOS, introduced: 8.0, deprecated: 10.0, message: "Use UserNotifications Framework's -[UNUserNotificationCenter requestAuthorizationWithOptions:completionHandler:]")
+  func appDidRegister(notificationSettings: UIUserNotificationSettings)
+
+  func appDidRegisterForRemoteNotifications(with deviceToken: Data)
+
+  func appDidFailToRegisterForRemoteNotifications(with error: Error)
+
+  @available(iOS, deprecated: 10.0, message: "Use UserNotifications Framework's -[UNUserNotificationCenterDelegate willPresentNotification:withCompletionHandler:] or -[UNUserNotificationCenterDelegate didReceiveNotificationResponse:withCompletionHandler:] for user visible notifications and -[UIApplicationDelegate application:didReceiveRemoteNotification:fetchCompletionHandler:] for silent remote notifications")
+  func appDidReceive(_ notification: Notification)
+
+  // MARK: - Notification.Actions
+
+  @available(iOS, deprecated: 10.0, message: "Use UserNotifications Framework's -[UNUserNotificationCenterDelegate didReceiveNotificationResponse:withCompletionHandler:]")
+  func appHandleAction(with identifier: String?, for notification: Notification,
+                       responseInfo: ResponseInfo?, completionHandler: @escaping VoidHandler)
+
+  // MARK: - Background
+
+  func appReadyFetchDataForRemoteNotification(with userInfo: UserInfo, fetchHandler: @escaping BackgroundFetchResultHandler)
+  //swiftlint:enable line_length
+
+  func appPerformFetch(with completionHandler: @escaping BackgroundFetchResultHandler)
+
+  func appHandleEventsForBackgroundURLSession(with identifier: String, completionHandler: @escaping VoidHandler)
+
+  // MARK: - Shorcuts
+
+  func appPerformAction(for shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping BoolHandler)
+
+  // MARK: - WatchKit
+
+  func appHandleWatchKitExtensionRequest(with userInfo: UserInfo?, reply: @escaping UserInfoHandler)
+
+  // MARK: - HealthKit
+
+  @available(iOS 9.0, *)
+  func appShouldRequestHealthAuthorization()
+
+  // MARK: - Protected Data
+
+  func appProtectedDataWillBecomeUnavailable()
+
+  func appProtectedDataDidBecomeAvailable()
+
+  // MARK: - Extensions
+
+  func appShouldAllow(extensionPointIdentifier: UIApplicationExtensionPointIdentifier) -> Bool
+
+  // MARK: - Restoration
+
+  func appViewController(with restorationIdentifierComponents: [Any], coder: NSCoder) -> UIViewController?
+
+  func appShouldSaveApplicationState(coder: NSCoder) -> Bool
+
+  func appShouldRestoreApplicationState(coder: NSCoder) -> Bool
+
+  func appWillEncodeRestorableState(with coder: NSCoder)
+
+  func appDidDecodeRestorableState(with coder: NSCoder)
+
+  // MARK: - User Activity
+
+  func appWillContinueUserActivity(with userActivityType: String) -> Bool
+
+  func appContinue(userActivity: NSUserActivity, restorationHandler: @escaping RestorationHandler) -> Bool
+
+  func appDidFailToContinueUserActivity(with userActivityType: String, error: Error)
+
+  func appDidUpdate(userActivity: NSUserActivity)
 
 }
+
+
+
+
+
+
 
 // MARK: - Defaults
 
 public extension AppService {
 
-  public var shouldSetupEarly: Bool { return false }
+  var shouldSetupEarly: Bool { return false }
 
-  public func applicationWillFinishLaunch(with options: LaunchOptions?) {}
+  func appWillFinishLaunch(with options: LaunchOptions?) { }
 
-  public func applicationDidFinishLaunch(with options: LaunchOptions?) {}
+  func appDidFinishLaunch(with options: LaunchOptions?) { }
 
-  public func applicationDidBecomeActive() {}
+  func appDidBecomeActive() { }
 
-  public func applicationWillResignActive() {}
+  func appWillResignActive() { }
 
-  public func applicationWillEnterForeground() {}
+  func appWillEnterForeground() { }
 
-  public func applicationDidEnterBackground() {}
+  func appDidEnterBackground() { }
 
-  public func applicationWillTerminate() {}
+  func appWillTerminate() { }
 
-  public func appDidReceiveMemoryWarning() {}
+  func appDidReceiveMemoryWarning() { }
 
-  public func appSignificantTimeChange() {}
+  func appSignificantTimeChange() { }
 
   // MARK: - App Orientation
 
-  public func appSupportedInterfaceOrientations(for window: UIWindow?) -> UIInterfaceOrientationMask {
+  func appInterfaceOrientationMask(for window: UIWindow?) -> UIInterfaceOrientationMask {
     return UIInterfaceOrientationMask(rawValue: 0)
   }
 
   // MARK: - URLs
   
-  public func appOpen(url: URL, sourceApplication: String?, annotation: Any?) -> Bool {
-    return false
-  }
-  
-  public func appOpen(url: URL, options: OpenURLOptions = [:]) -> Bool {
-    return false
+  func shouldAppOpen(url: URL, options: OpenURLOptions = [:]) -> Bool {
+    return true
   }
   
   // MARK: - Status bar
   // MARK: Orientation
-  
-  public func application(_ application: UIApplication,
-                          willChangeStatusBarOrientation newStatusBarOrientation: UIInterfaceOrientation,
-                          duration: TimeInterval) {
 
-  }
+  func appWillChangeStatusBarOrientation(to new: UIInterfaceOrientation, duration: TimeInterval) { }
 
-  public func application(_ application: UIApplication,
-                        didChangeStatusBarOrientation oldStatusBarOrientation: UIInterfaceOrientation) {
-
-  }
+  func appDidChangeStatusBarOrientation(from old: UIInterfaceOrientation) { }
 
   // MARK: Frame
 
-  public func application(_ application: UIApplication,
-                        willChangeStatusBarFrame newStatusBarFrame: CGRect) {
-
+  func appWillChangeStatusBarFrame(to new: CGRect) {
   }
 
-  public func application(_ application: UIApplication,
-                        didChangeStatusBarFrame oldStatusBarFrame: CGRect) {
-
-  }
+  func appDidChangeStatusBarFrame(from old: CGRect) { }
 
   // MARK: - Notifications
 
-  //swiftlint:disable:next line_length
+  //swiftlint:disable line_length
   @available(iOS, introduced: 8.0, deprecated: 10.0, message: "Use UserNotifications Framework's -[UNUserNotificationCenter requestAuthorizationWithOptions:completionHandler:]")
-  public func application(_ application: UIApplication,
-                        didRegister notificationSettings: UIUserNotificationSettings) {
+  func appDidRegister(notificationSettings: UIUserNotificationSettings) { }
 
-  }
+  func appDidRegisterForRemoteNotifications(with deviceToken: Data) { }
 
-  public func application(_ application: UIApplication,
-                        didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+  func appDidFailToRegisterForRemoteNotifications(with error: Error) { }
 
-  }
-
-  public func application(_ application: UIApplication,
-                        didFailToRegisterForRemoteNotificationsWithError error: Error) {
-
-  }
-
-  //swiftlint:disable:next line_length
   @available(iOS, introduced: 3.0, deprecated: 10.0, message: "Use UserNotifications Framework's -[UNUserNotificationCenterDelegate willPresentNotification:withCompletionHandler:] or -[UNUserNotificationCenterDelegate didReceiveNotificationResponse:withCompletionHandler:] for user visible notifications and -[UIApplicationDelegate application:didReceiveRemoteNotification:fetchCompletionHandler:] for silent remote notifications")
-  public func application(_ application: UIApplication,
-                        didReceiveRemoteNotification userInfo: UserInfo) {
+  func appDidReceive(_ notification: Notification) { }
 
-  }
+  // MARK: - Notification.Actions
 
-  //swiftlint:disable:next line_length
-  @available(iOS, introduced: 4.0, deprecated: 10.0, message: "Use UserNotifications Framework's -[UNUserNotificationCenterDelegate willPresentNotification:withCompletionHandler:] or -[UNUserNotificationCenterDelegate didReceiveNotificationResponse:withCompletionHandler:]")
-  public func application(_ application: UIApplication,
-                        didReceive notification: UILocalNotification) {
-
-  }
-
-  //swiftlint:disable:next line_length
-  @available(iOS, introduced: 8.0, deprecated: 10.0, message: "Use UserNotifications Framework's -[UNUserNotificationCenterDelegate didReceiveNotificationResponse:withCompletionHandler:]")
-  public func application(_ application: UIApplication,
-                        handleActionWithIdentifier identifier: String?,
-                        for notification: UILocalNotification,
-                        completionHandler: @escaping VoidHandler) {
-
-  }
-
-  //swiftlint:disable:next line_length
   @available(iOS, introduced: 9.0, deprecated: 10.0, message: "Use UserNotifications Framework's -[UNUserNotificationCenterDelegate didReceiveNotificationResponse:withCompletionHandler:]")
-  public func application(_ application: UIApplication,
-                        handleActionWithIdentifier identifier: String?,
-                        forRemoteNotification userInfo: UserInfo,
-                        withResponseInfo responseInfo: UserInfo,
-                        completionHandler: @escaping VoidHandler) {
-
-  }
-
-  //swiftlint:disable:next line_length
-  @available(iOS, introduced: 8.0, deprecated: 10.0, message: "Use UserNotifications Framework's -[UNUserNotificationCenterDelegate didReceiveNotificationResponse:withCompletionHandler:]")
-  public func application(_ application: UIApplication,
-                        handleActionWithIdentifier identifier: String?,
-                        forRemoteNotification userInfo: UserInfo,
-                        completionHandler: @escaping VoidHandler) {
-
-  }
-
-  //swiftlint:disable:next line_length
-  @available(iOS, introduced: 9.0, deprecated: 10.0, message: "Use UserNotifications Framework's -[UNUserNotificationCenterDelegate didReceiveNotificationResponse:withCompletionHandler:]")
-  public func application(_ application: UIApplication,
-                        handleActionWithIdentifier identifier: String?,
-                        for notification: UILocalNotification,
-                        withResponseInfo responseInfo: UserInfo,
-                        completionHandler: @escaping VoidHandler) {
-
-  }
+  func appHandleAction(with identifier: String?, for notification: Notification,
+                       with responseInfo: ResponseInfo?, completionHandler: @escaping VoidHandler) { }
+  //swiftlint:enable line_length
 
   // MARK: - Background
 
-  public func application(_ application: UIApplication,
-                        didReceiveRemoteNotification userInfo: UserInfo,
-                        fetchCompletionHandler completionHandler: @escaping BackgroundFetchResultHandler) {
+  func appReadyFetchDataForRemoteNotification(with userInfo: UserInfo,
+                                              fetchHandler: @escaping BackgroundFetchResultHandler) { }
 
-  }
+  func appPerformFetch(with completionHandler: @escaping BackgroundFetchResultHandler) { }
 
-  public func application(_ application: UIApplication,
-                        performFetchWithCompletionHandler completionHandler: @escaping BackgroundFetchResultHandler) {
-
-  }
-
-  public func application(_ application: UIApplication,
-                        handleEventsForBackgroundURLSession identifier: String,
-                        completionHandler: @escaping VoidHandler) {
-
-  }
+  func appHandleEventsForBackgroundURLSession(with identifier: String,
+                                              completionHandler: @escaping VoidHandler) { }
 
   // MARK: - Shorcuts
 
-  public func application(_ application: UIApplication,
-                        performActionFor shortcutItem: UIApplicationShortcutItem,
-                        completionHandler: @escaping BoolHandler) {
-
-  }
+  func appPerformAction(for shortcutItem: UIApplicationShortcutItem,
+                          completionHandler: @escaping BoolHandler) { }
 
   // MARK: - WatchKit
 
-  public func application(_ application: UIApplication,
-                        handleWatchKitExtensionRequest userInfo: UserInfo?,
-                        reply: @escaping UserInfoHandler) {
-
-  }
+  func appHandleWatchKitExtensionRequest(with userInfo: UserInfo?,
+                                         reply: @escaping UserInfoHandler) { }
 
   // MARK: - HealthKit
 
   @available(iOS 9.0, *)
-  public func applicationShouldRequestHealthAuthorization(_ application: UIApplication) {
-
-  }
+  func appShouldRequestHealthAuthorization() { }
 
   // MARK: - Protected Data
 
-  public func applicationProtectedDataWillBecomeUnavailable(_ application: UIApplication) {
+  func appProtectedDataWillBecomeUnavailable() { }
 
-  }
-
-  public func applicationProtectedDataDidBecomeAvailable(_ application: UIApplication) {
-
-  }
+  func appProtectedDataDidBecomeAvailable() { }
 
   // MARK: - Extensions
 
-  //swiftlint:disable line_length
-  public func application(_ application: UIApplication,
-                        shouldAllowExtensionPointIdentifier extensionPointIdentifier: UIApplicationExtensionPointIdentifier) -> Bool {
+  func appShouldAllow(extensionPointIdentifier: UIApplicationExtensionPointIdentifier) -> Bool {
     return true
   }
-  //swiftlint:enable line_length
 
   // MARK: - Restoration
 
-  public func application(_ application: UIApplication,
-                        viewControllerWithRestorationIdentifierPath identifierComponents: [Any],
-                        coder: NSCoder) -> UIViewController? {
+  func appViewController(with restorationIdentifierComponents: [Any], coder: NSCoder) -> UIViewController? {
     return nil
   }
 
-  public func application(_ application: UIApplication, shouldSaveApplicationState coder: NSCoder) -> Bool {
+  func appShouldSaveApplicationState(coder: NSCoder) -> Bool {
     return false
   }
 
-  public func application(_ application: UIApplication, shouldRestoreApplicationState coder: NSCoder) -> Bool {
+  func appShouldRestoreApplicationState(coder: NSCoder) -> Bool {
     return false
   }
 
-  public func application(_ application: UIApplication, willEncodeRestorableStateWith coder: NSCoder) {
+  func appWillEncodeRestorableState(with coder: NSCoder) { }
 
-  }
-
-  public func application(_ application: UIApplication, didDecodeRestorableStateWith coder: NSCoder) {
-
-  }
+  func appDidDecodeRestorableState(with coder: NSCoder) { }
 
   // MARK: - User Activity
 
-  public func application(_ application: UIApplication,
-                        willContinueUserActivityWithType userActivityType: String) -> Bool {
+  func appWillContinueUserActivity(with userActivityType: String) -> Bool {
     return false
   }
 
-  public func application(_ application: UIApplication,
-                        continue userActivity: NSUserActivity,
-                        restorationHandler: @escaping RestorationHandler) -> Bool {
+  func appContinue(userActivity: NSUserActivity, restorationHandler: @escaping RestorationHandler) -> Bool {
     return false
   }
 
-  public func application(_ application: UIApplication,
-                        didFailToContinueUserActivityWithType userActivityType: String,
-                        error: Error) {
+  func appDidFailToContinueUserActivity(with userActivityType: String, error: Error) { }
 
-  }
-
-  public func application(_ application: UIApplication,
-                        didUpdate userActivity: NSUserActivity) {
-
-  }
-
-//  @available(iOS 10.0, *)
-//  public func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse,
-//                              withCompletionHandler completionHandler: @escaping VoidHandler) { }
-//
-//  @available(iOS 10.0, *)
-//  //swiftlint:disable line_length
-//  public func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification,
-//                              withCompletionHandler completionHandler: @escaping NotificationPresentationOptionsHandler) { }
-//  //swiftlint:enable line_length
+  func appDidUpdate(userActivity: NSUserActivity) { }
 }

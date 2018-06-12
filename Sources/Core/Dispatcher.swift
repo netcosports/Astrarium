@@ -6,9 +6,11 @@
 //
 
 import UIKit
+#if canImport(UserNotifications)
 import UserNotifications
+#endif
 
-final public class Dispatcher: NSObject {
+final public class Dispatcher {
 
   internal let identifiers: [ServiceIds]
   internal var initializedServices = [String: AppService]()
@@ -32,12 +34,17 @@ final public class Dispatcher: NSObject {
 
   // MARK: - Init
 
+  public init() {
+    fatalError("should not be called directly")
+  }
+
   required public init(services: [ServiceIds?]) {
     identifiers = services.compactMap { $0 }
-    super.init()
   }
 
   // MARK: - Public
+
+  public func setup(with launchOptions: LaunchOptions) { }
 
   public func service<T: AppService>(for identifier: ServiceIdentifier<T>) -> T? {
     return internalService(for: identifier) as? T
