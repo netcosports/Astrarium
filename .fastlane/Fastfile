@@ -73,6 +73,7 @@ lane :push do |options|
   pod_push(
     path: podspec,
     repo: 'NSTPodsSpecs',
+    allow_warnings: true,
     sources: sources
   )
 end
