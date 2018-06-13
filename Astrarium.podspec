@@ -9,7 +9,6 @@ Pod::Spec.new do |s|
     'Dmitry Duleba' => 'dmitry.duleba@netcosports.com'
   }
   s.source = { :git => 'https://github.com/netcosports/Astrarium.git', :tag => s.version.to_s }
-
   s.framework = ["UIKit", "Foundation"]
 
   s.ios.deployment_target = '9.0'
