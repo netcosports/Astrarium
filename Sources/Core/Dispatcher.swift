@@ -6,9 +6,6 @@
 //
 
 import UIKit
-#if canImport(UserNotifications)
-import UserNotifications
-#endif
 
 final public class Dispatcher {
 
@@ -50,14 +47,14 @@ final public class Dispatcher {
     return internalService(for: identifier) as? T
   }
 
-  public subscript<T: AppService>(identifier: ServiceIdentifier<T>) -> T {
+  public subscript<T: AppService>(force identifier: ServiceIdentifier<T>) -> T {
     guard let service = service(for: identifier) else {
       fatalError("Service with \(identifier) is not present in services list")
     }
     return service
   }
 
-  public subscript<T: AppService>(safe identifier: ServiceIdentifier<T>) -> T? {
+  public subscript<T: AppService>(identifier: ServiceIdentifier<T>) -> T? {
     return service(for: identifier)
   }
 }

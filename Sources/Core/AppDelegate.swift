@@ -29,9 +29,6 @@ open class AppDelegate: UIResponder, UIApplicationDelegate {
     if #available(iOS 10.0, *) {
       if let delegate = self as? UNUserNotificationCenterDelegate {
         UNUserNotificationCenter.current().delegate = delegate
-        print("Bound User Notifications delegate")
-      } else {
-        print("Not bound User Notifications delegate")
       }
     }
   }

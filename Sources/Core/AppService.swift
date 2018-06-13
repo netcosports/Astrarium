@@ -5,12 +5,6 @@
 //  Created by Dmitry Duleba on 5/23/18.
 //
 import UIKit
-import UserNotifications
-
-public enum Notification {
-  case local(UILocalNotification)
-  case remote(UserInfo)
-}
 
 public protocol AppService: ServiceInitiable {
 
