@@ -20,22 +20,22 @@ Pod::Spec.new do |s|
     sub.source_files = 'Sources/Core/*.swift'
   end
 
-  s.subspec 'CloudKit' do |sub|
-    sub.source_files = 'Sources/CloudKit/*.swift'
-    sub.dependency 'Astrarium/Core'
-    sub.framework = "CloudKit"
-  end
+  # s.subspec 'CloudKit' do |sub|
+  #   sub.source_files = 'Sources/CloudKit/*.swift'
+  #   sub.dependency 'Astrarium/Core'
+  #   sub.framework = "CloudKit"
+  # end
 
-  s.subspec 'UserNotifications' do |sub|
-    sub.source_files = 'Sources/UserNotifications/*.swift'
-    sub.dependency 'Astrarium/Core'
-    sub.framework = "UserNotifications"
-  end
+  # s.subspec 'UserNotifications' do |sub|
+  #   sub.source_files = 'Sources/UserNotifications/*.swift'
+  #   sub.dependency 'Astrarium/Core'
+  #   sub.framework = "UserNotifications"
+  # end
 
-  s.subspec 'Intents' do |sub|
-    sub.source_files = 'Sources/Intents/*.swift'
-    sub.dependency 'Astrarium/Core'
-    sub.framework = "Intents"
-  end
+  # s.subspec 'Intents' do |sub|
+  #   sub.source_files = 'Sources/Intents/*.swift'
+  #   sub.dependency 'Astrarium/Core'
+  #   sub.framework = "Intents"
+  # end
 
 end
