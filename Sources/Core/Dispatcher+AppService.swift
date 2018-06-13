@@ -10,15 +10,13 @@ import Foundation
 extension Dispatcher: AppService {
 
   public func appWillFinishLaunch(with options: LaunchOptions?) {
-    allServices.filter { $0.shouldSetupEarly }
+    earlyServices
       .forEach { $0.setup(with: options ?? [:]) }
-    allServices.forEach { $0.appWillFinishLaunch(with: options) }
   }
 
   public func appDidFinishLaunch(with options: LaunchOptions?) {
-    allServices.filter { !$0.shouldSetupEarly }
+    lateServices
       .forEach { $0.setup(with: options ?? [:]) }
-    allServices.forEach { $0.appDidFinishLaunch(with: options) }
   }
 
   public func appDidBecomeActive() {

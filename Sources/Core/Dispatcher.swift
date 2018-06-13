@@ -15,6 +15,14 @@ final public class Dispatcher {
   internal lazy var allServices: [AppService] = identifiers
     .compactMap { internalService(for: $0) }
 
+  internal var earlyServices: [AppService] {
+    return allServices.filter { $0.shouldSetupEarly }
+  }
+
+  internal var lateServices: [AppService] {
+    return allServices.filter { !$0.shouldSetupEarly }
+  }
+
   // MARK: - Shared
 
   private static var registeredSharedDispatcher: Dispatcher?

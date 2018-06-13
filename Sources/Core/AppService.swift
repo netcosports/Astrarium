@@ -14,10 +14,6 @@ public protocol AppService: ServiceInitiable {
 
   func setup(with launchOptions: LaunchOptions)
 
-  func appWillFinishLaunch(with options: LaunchOptions?)
-
-  func appDidFinishLaunch(with options: LaunchOptions?)
-
   func appDidBecomeActive()
 
   func appWillResignActive()
@@ -134,10 +130,6 @@ public protocol AppService: ServiceInitiable {
 public extension AppService {
 
   var shouldSetupEarly: Bool { return false }
-
-  func appWillFinishLaunch(with options: LaunchOptions?) { }
-
-  func appDidFinishLaunch(with options: LaunchOptions?) { }
 
   func appDidBecomeActive() { }
 

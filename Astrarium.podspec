@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name = 'Astrarium'
-  s.version = '0.1.1'
+  s.version = '0.1.2'
   s.summary = 'Services management library'
 
   s.homepage = 'https://github.com/netcosports/Astrarium'
@@ -8,7 +8,7 @@ Pod::Spec.new do |s|
   s.author = { 
     'Dmitry Duleba' => 'dmitry.duleba@netcosports.com'
   }
-  s.source = { :git => 'https://github.com/netcosports/Astrarium.git', :tag => s.version.dup }
+  s.source = { :git => 'https://github.com/netcosports/Astrarium.git', :tag => s.version.to_s }
   s.framework = ["UIKit", "Foundation"]
 
   s.ios.deployment_target = '9.0'
