@@ -92,7 +92,6 @@ open class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var mask = UIInterfaceOrientationMask()
     orientations.forEach {
-      print($0)
       switch $0 {
       case "UIInterfaceOrientationPortrait": mask.insert(.portrait)
       case "UIInterfaceOrientationPortraitUpsideDown": mask.insert(.portraitUpsideDown)

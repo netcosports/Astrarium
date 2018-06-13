@@ -16,15 +16,15 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 
   //swiftlint:disable line_length
   open func userNotificationCenter(_ center: UNUserNotificationCenter,
-                                     willPresent notification: UNNotification,
-                                     withCompletionHandler completionHandler: @escaping NotificationPresentationOptionsHandler) {
+                                   willPresent notification: UNNotification,
+                                   withCompletionHandler completionHandler: @escaping NotificationPresentationOptionsHandler) {
     dispatcher.userNotificationCenter(center, willPresent: notification, withCompletionHandler: completionHandler)
   }
   //swiftlint:enable line_length
 
   open func userNotificationCenter(_ center: UNUserNotificationCenter,
-                                     didReceive response: UNNotificationResponse,
-                                     withCompletionHandler completionHandler: @escaping VoidHandler) {
+                                   didReceive response: UNNotificationResponse,
+                                   withCompletionHandler completionHandler: @escaping VoidHandler) {
     dispatcher.userNotificationCenter(center, didReceive: response, withCompletionHandler: completionHandler)
   }
 }

@@ -129,12 +129,6 @@ public protocol AppService: ServiceInitiable {
 
 }
 
-
-
-
-
-
-
 // MARK: - Defaults
 
 public extension AppService {
@@ -166,11 +160,11 @@ public extension AppService {
   }
 
   // MARK: - URLs
-  
+
   func shouldAppOpen(url: URL, options: OpenURLOptions = [:]) -> Bool {
     return true
   }
-  
+
   // MARK: - Status bar
   // MARK: Orientation
 
@@ -218,7 +212,7 @@ public extension AppService {
   // MARK: - Shorcuts
 
   func appPerformAction(for shortcutItem: UIApplicationShortcutItem,
-                          completionHandler: @escaping BoolHandler) { }
+                        completionHandler: @escaping BoolHandler) { }
 
   // MARK: - WatchKit
 

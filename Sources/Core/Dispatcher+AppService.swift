@@ -49,7 +49,7 @@ extension Dispatcher: AppService {
     allServices.forEach { $0.appSignificantTimeChange() }
   }
 
-// MARK: - App Orientation
+  // MARK: - App Orientation
 
   public func appInterfaceOrientationMask(for window: UIWindow?) -> UIInterfaceOrientationMask {
     for service in allServices {
@@ -116,7 +116,7 @@ extension Dispatcher: AppService {
 
   // MARK: - Notification.Actions
 
-    @available(iOS, deprecated: 10.0, message: "Use UserNotifications Framework")
+  @available(iOS, deprecated: 10.0, message: "Use UserNotifications Framework")
   public func appHandleAction(with identifier: String?, for notification: Notification,
                               responseInfo: ResponseInfo?, completionHandler: @escaping VoidHandler) {
     allServices.forEach { $0.appHandleAction(with: identifier, for: notification,
@@ -126,7 +126,6 @@ extension Dispatcher: AppService {
   //swiftlint:enable line_length
 
   // MARK: - Background
-
 
   public func appReadyFetchDataForRemoteNotification(with userInfo: UserInfo,
                                                      fetchHandler: @escaping BackgroundFetchResultHandler) {
@@ -139,7 +138,7 @@ extension Dispatcher: AppService {
   }
 
   public func appHandleEventsForBackgroundURLSession(with identifier: String,
-                                              completionHandler: @escaping VoidHandler) {
+                                                     completionHandler: @escaping VoidHandler) {
     allServices.forEach { $0.appHandleEventsForBackgroundURLSession(with: identifier,
                                                                     completionHandler: completionHandler) }
   }
@@ -154,7 +153,7 @@ extension Dispatcher: AppService {
   // MARK: - WatchKit
 
   public func appHandleWatchKitExtensionRequest(with userInfo: UserInfo?,
-                                         reply: @escaping UserInfoHandler) {
+                                                reply: @escaping UserInfoHandler) {
     allServices.forEach { $0.appHandleWatchKitExtensionRequest(with: userInfo, reply: reply) }
   }
 
