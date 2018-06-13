@@ -5,12 +5,22 @@
     
     
       
-      <testcase classname="fastlane.lanes" name="0: Switch to podspec lane" time="0.004679">
+      <testcase classname="fastlane.lanes" name="0: Switch to podspec lane" time="0.004578">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="1: pod_push" time="28.80227">
+      <testcase classname="fastlane.lanes" name="1: version_get_podspec" time="0.001507">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="2: git tag -am 'Added base delegate methods' '0.0.2'" time="0.015633">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="3: git push --tags" time="4.145323">
         
       </testcase>
     
