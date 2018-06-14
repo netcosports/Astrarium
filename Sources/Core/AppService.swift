@@ -188,7 +188,7 @@ public extension AppService {
 
   @available(iOS, introduced: 9.0, deprecated: 10.0, message: "Use UserNotifications Framework's -[UNUserNotificationCenterDelegate didReceiveNotificationResponse:withCompletionHandler:]")
   func appHandleAction(with identifier: String?, for notification: Notification,
-                       with responseInfo: ResponseInfo?, completionHandler: @escaping VoidHandler) { }
+                       responseInfo: ResponseInfo?, completionHandler: @escaping VoidHandler) { }
   //swiftlint:enable line_length
 
   // MARK: - Background

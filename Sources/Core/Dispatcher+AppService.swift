@@ -118,7 +118,7 @@ extension Dispatcher: AppService {
   public func appHandleAction(with identifier: String?, for notification: Notification,
                               responseInfo: ResponseInfo?, completionHandler: @escaping VoidHandler) {
     allServices.forEach { $0.appHandleAction(with: identifier, for: notification,
-                                             with: responseInfo, completionHandler: completionHandler) }
+                                             responseInfo: responseInfo, completionHandler: completionHandler) }
   }
 
   //swiftlint:enable line_length
