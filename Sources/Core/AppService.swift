@@ -34,7 +34,7 @@ public protocol AppService: ServiceInitiable {
 
   // MARK: - URLs
 
-  func shouldAppOpen(url: URL, options: OpenURLOptions) -> Bool
+  func handle(url: URL, with options: OpenURLOptions) -> Bool
 
   // MARK: - Status bar
   // MARK: Orientation
@@ -153,8 +153,8 @@ public extension AppService {
 
   // MARK: - URLs
 
-  func shouldAppOpen(url: URL, options: OpenURLOptions = [:]) -> Bool {
-    return true
+  func handle(url: URL, with options: OpenURLOptions = [:]) -> Bool {
+    return false
   }
 
   // MARK: - Status bar

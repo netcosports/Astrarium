@@ -63,7 +63,7 @@ extension Dispatcher: AppService {
 
   public func shouldAppOpen(url: URL, options: OpenURLOptions = [:]) -> Bool {
     for service in allServices {
-      if service.shouldAppOpen(url: url, options: options) {
+      if service.handle(url: url, with: options) {
         return false
       }
     }
