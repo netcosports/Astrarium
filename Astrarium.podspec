@@ -26,8 +26,9 @@ Pod::Spec.new do |s|
   # end
 
   s.subspec 'UserNotifications' do |sub|
-    sub.source_files = 'Sources/UserNotifications/*.swift'
     sub.dependency 'Astrarium/Core'
+    sub.source_files = 'Sources/UserNotifications/UserNotificationsService.swift'
+    sub.source_files = 'Sources/UserNotifications/*.swift'
     sub.weak_framework = "UserNotifications"
   end
 
