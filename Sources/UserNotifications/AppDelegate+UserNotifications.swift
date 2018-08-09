@@ -29,6 +29,10 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
   open func userNotificationCenter(_ center: UNUserNotificationCenter,
                                    didReceive response: UNNotificationResponse,
                                    withCompletionHandler completionHandler: @escaping VoidHandler) {
-    dispatcher.userNotificationCenter(center, didReceive: response, withCompletionHandler: completionHandler)
+    if dispatcher.userNotificationCenter(center, didReceive: response, withCompletionHandler: completionHandler) {
+      return
+    }
+
+    completionHandler()
   }
 }
