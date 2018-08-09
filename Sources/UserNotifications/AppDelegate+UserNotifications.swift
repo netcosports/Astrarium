@@ -18,7 +18,11 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
   open func userNotificationCenter(_ center: UNUserNotificationCenter,
                                    willPresent notification: UNNotification,
                                    withCompletionHandler completionHandler: @escaping NotificationPresentationOptionsHandler) {
-    dispatcher.userNotificationCenter(center, willPresent: notification, withCompletionHandler: completionHandler)
+    if dispatcher.userNotificationCenter(center, willPresent: notification, withCompletionHandler: completionHandler) {
+      return
+    }
+
+    completionHandler(UNNotificationPresentationOptions(rawValue: 0))
   }
   //swiftlint:enable line_length
 

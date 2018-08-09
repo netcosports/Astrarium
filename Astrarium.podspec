@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name = 'Astrarium'
-  s.version = '0.1.3'
+  s.version = '0.1.4'
   s.summary = 'Services management library'
 
   s.homepage = 'https://github.com/netcosports/Astrarium'
@@ -25,11 +25,11 @@ Pod::Spec.new do |s|
   #   sub.framework = "CloudKit"
   # end
 
-  # s.subspec 'UserNotifications' do |sub|
-  #   sub.source_files = 'Sources/UserNotifications/*.swift'
-  #   sub.dependency 'Astrarium/Core'
-  #   sub.framework = "UserNotifications"
-  # end
+  s.subspec 'UserNotifications' do |sub|
+    sub.source_files = 'Sources/UserNotifications/*.swift'
+    sub.dependency 'Astrarium/Core'
+    sub.weak_framework = "UserNotifications"
+  end
 
   # s.subspec 'Intents' do |sub|
   #   sub.source_files = 'Sources/Intents/*.swift'
