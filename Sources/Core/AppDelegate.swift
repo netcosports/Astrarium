@@ -288,7 +288,7 @@ open class AppDelegate: UIResponder, UIApplicationDelegate {
 
   //swiftlint:disable line_length
   open func application(_ application: UIApplication,
-                        shouldAllowExtensionPointIdentifier extensionPointIdentifier: UIApplicationExtensionPointIdentifier) -> Bool {
+                        shouldAllowExtensionPointIdentifier extensionPointIdentifier: UIApplication.ExtensionPointIdentifier) -> Bool {
     return dispatcher.appShouldAllow(extensionPointIdentifier: extensionPointIdentifier)
   }
   //swiftlint:enable line_length

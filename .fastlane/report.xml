@@ -5,12 +5,12 @@
     
     
       
-      <testcase classname="fastlane.lanes" name="0: Switch to podspec lane" time="0.006605">
+      <testcase classname="fastlane.lanes" name="0: Switch to podspec lane" time="0.001425">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="1: pod_spec_lint" time="28.330698">
+      <testcase classname="fastlane.lanes" name="1: pod_push" time="31.801152">
         
       </testcase>
     

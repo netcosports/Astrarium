@@ -174,7 +174,7 @@ extension Dispatcher: AppService {
 
   // MARK: - Extensions
 
-  public func appShouldAllow(extensionPointIdentifier: UIApplicationExtensionPointIdentifier) -> Bool {
+  public func appShouldAllow(extensionPointIdentifier: UIApplication.ExtensionPointIdentifier) -> Bool {
     for service in allServices {
       if !service.appShouldAllow(extensionPointIdentifier: extensionPointIdentifier) {
         return false

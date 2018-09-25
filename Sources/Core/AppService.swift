@@ -99,7 +99,7 @@ public protocol AppService: ServiceInitiable {
 
   // MARK: - Extensions
 
-  func appShouldAllow(extensionPointIdentifier: UIApplicationExtensionPointIdentifier) -> Bool
+  func appShouldAllow(extensionPointIdentifier: UIApplication.ExtensionPointIdentifier) -> Bool
 
   // MARK: - Restoration
 
@@ -224,7 +224,7 @@ public extension AppService {
 
   // MARK: - Extensions
 
-  func appShouldAllow(extensionPointIdentifier: UIApplicationExtensionPointIdentifier) -> Bool {
+  func appShouldAllow(extensionPointIdentifier: UIApplication.ExtensionPointIdentifier) -> Bool {
     return true
   }
 

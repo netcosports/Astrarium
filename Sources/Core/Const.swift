@@ -7,8 +7,8 @@
 
 import UIKit
 
-public typealias LaunchOptions = [UIApplicationLaunchOptionsKey: Any]
-public typealias OpenURLOptions = [UIApplicationOpenURLOptionsKey: Any]
+public typealias LaunchOptions = [UIApplication.LaunchOptionsKey: Any]
+public typealias OpenURLOptions = [UIApplication.OpenURLOptionsKey: Any]
 public typealias UserInfo = [AnyHashable : Any]
 public typealias ResponseInfo = [AnyHashable : Any]
 public typealias VoidHandler = () -> Swift.Void
