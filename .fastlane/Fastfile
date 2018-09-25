@@ -74,7 +74,7 @@ end
 lane :push do |options|
   pod_push(
     path: podspec,
-    repo: 'netcosports-1',
+    repo: 'NSTPodsSpecs',
     allow_warnings: true,
     sources: sources
   )
