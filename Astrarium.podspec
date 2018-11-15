@@ -6,7 +6,7 @@ Pod::Spec.new do |s|
   s.homepage = 'https://github.com/netcosports/Astrarium'
   s.license = { :type => "MIT" }
   s.author = { 
-    'Dmitry Duleba' => 'dmitry.duleba@netcosports.com'
+    'Dmitry Duleba' => 'dmitryduleba@gmail.com'
   }
   s.source = { :git => 'https://github.com/netcosports/Astrarium.git', :tag => s.version.to_s }
   s.framework = ["UIKit", "Foundation"]
