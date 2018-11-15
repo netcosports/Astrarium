@@ -1,4 +1,4 @@
-sources = ['git@github.com:netcosports/NSTPodsSpecs', 'git@github.com:CocoaPods/Specs']
+sources = ['git@github.com:CocoaPods/Specs']
 
 # lane :test do
 #   scan(scheme: 'iOS-Tests', device: 'iPhone 7')
@@ -74,9 +74,7 @@ end
 lane :push do |options|
   pod_push(
     path: podspec,
-    repo: 'NSTPodsSpecs',
-    allow_warnings: true,
-    sources: sources
+    allow_warnings: true
   )
 end
 

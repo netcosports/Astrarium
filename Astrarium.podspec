@@ -1,10 +1,10 @@
 Pod::Spec.new do |s|
   s.name = 'Astrarium'
-  s.version = '0.2.1'
+  s.version = '1.0.0'
   s.summary = 'Services management library'
 
   s.homepage = 'https://github.com/netcosports/Astrarium'
-  s.license = { :type => "MIT" }
+  s.license = { :type => "GNU" }
   s.author = { 
     'Dmitry Duleba' => 'dmitryduleba@gmail.com'
   }
