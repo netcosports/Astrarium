@@ -15,16 +15,16 @@ pod 'Astrarium', '~> 1.0'
 ## Main concept
 
 The main idea behind this library is to solve the following problems:
-- Make `AppDelegate` implementation is more clean;
+- Make `AppDelegate` implementation is cleaner;
 - Stop providing interface over managers/handlers as singleton object;
 
-The main concept of Astrarium is `Service`. Service is statefull object in most of the cases. 
-It has the same lifetime with application.
+The main concept of Astrarium is `Service`. A service is a statefull object in most of the cases. 
+It has the same lifetime as the application.
 Access to these services is done by `ServiceIdentifier` using `Dispatcher`.
 
 ## Initialization
 
-To integrate Astrarium into your app, you need to inherite your `AppDelegate` from Astrarium.AppDelegate:
+To integrate Astrarium into your app, you need to be inherited your `AppDelegate` from Astrarium.AppDelegate:
 
 ```swift
 public class AppDelegate: Astrarium.AppDelegate
@@ -44,7 +44,7 @@ Then you need to override services variable and return list of services ids:
 ## Service implementation
 
 Service itself has access to any `AppDelegate` callbacks to perform any action your service needs.
-Here is simple example of UI service:
+Here is the simple example of UI service:
 
 ```swift
 extension ServiceIds {
