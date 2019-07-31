@@ -259,4 +259,5 @@ public extension AppService {
   func appDidFailToContinueUserActivity(with userActivityType: String, error: Error) { }
 
   func appDidUpdate(userActivity: NSUserActivity) { }
+
 }

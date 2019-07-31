@@ -34,4 +34,5 @@ extension Dispatcher {
     return false
   }
   //swiftlint:enable line_length
+
 }

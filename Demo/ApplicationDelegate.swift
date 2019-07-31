@@ -1,21 +1,34 @@
 //
 //  ApplicationDelegate.swift
-//  Demo
+//  Astrarium
 //
 //  Created by Dmitry Duleba on 5/23/18.
-//  Copyright © 2018 NetcoSports. All rights reserved.
 //
 
 import UIKit
+import Astrarium
+
+//swiftlint:disable:next identifier_name
+var Services: Dispatcher {
+  return Dispatcher.shared
+}
 
 @UIApplicationMain
-class ApplicationDelegate: AppDelegate {
+class ApplicationDelegate: Astrarium.AppDelegate {
 
-  var window: UIWindow?
-
-  func applicationDidFinishLaunching(_ application: UIApplication) {
-    window = UIWindow(frame: UIScreen.main.bounds)
-    window?.rootViewController = ViewController()
-    window?.makeKeyAndVisible()
+  override var services: [ServiceIds?] {
+    return [
+      .ui,
+      .remote,
+      .configurableDebugService,
+      .configurableProductionService
+    ]
   }
+
+  var window: UIWindow? {
+    get { return Services[.ui]?.window }
+    // swiftlint:disable:next unused_setter_value
+    set { assertionFailure("window setted should not be called directly") }
+  }
+
 }

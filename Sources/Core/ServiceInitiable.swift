@@ -8,5 +8,7 @@
 import Foundation
 
 public protocol ServiceInitiable {
+
   init()
+
 }

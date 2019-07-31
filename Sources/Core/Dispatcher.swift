@@ -10,7 +10,7 @@ import UIKit
 final public class Dispatcher {
 
   internal let identifiers: [ServiceIds]
-  internal var initializedServices = [String: AppService]()
+  internal var initializedServices = [ServiceIds: AppService]()
 
   internal lazy var allServices: [AppService] = identifiers
     .compactMap { internalService(for: $0) }
@@ -65,6 +65,7 @@ final public class Dispatcher {
   public subscript<T: AppService>(identifier: ServiceIdentifier<T>) -> T? {
     return service(for: identifier)
   }
+
 }
 
 // MARK: - Internal
@@ -72,14 +73,15 @@ final public class Dispatcher {
 extension Dispatcher {
 
   func internalService(for identifier: ServiceIds) -> AppService? {
-    if let service = initializedServices[identifier.key] {
+    if let service = initializedServices[identifier] {
       return service
     }
-    if identifiers.contains(where: { $0.key == identifier.key }) {
+    if identifiers.contains(identifier) {
       let newService = identifier.instanciateService()
-      initializedServices[identifier.key] = newService
+      initializedServices[identifier] = newService
       return newService
     }
     return nil
   }
+
 }

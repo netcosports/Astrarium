@@ -9,7 +9,7 @@ Global dispatchers library
 ## Installation
 
 ```ruby
-pod 'Astrarium', '~> 1.0'
+pod 'Astrarium', '~> 5.0'
 ```
 
 ## Main concept

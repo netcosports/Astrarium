@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 import Intents
 
 @available(iOS 10.0, *)
@@ -19,4 +20,5 @@ extension AppDelegate {
                         completionHandler: @escaping IntentResponseHandler) {
     dispatcher.application(application, handle: intent, completionHandler: completionHandler)
   }
+
 }

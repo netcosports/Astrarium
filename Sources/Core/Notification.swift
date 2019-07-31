@@ -6,8 +6,11 @@
 //
 
 import Foundation
+import UIKit
 
 public enum Notification {
+
   case local(UILocalNotification)
   case remote(UserInfo)
+
 }

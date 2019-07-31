@@ -1,10 +1,10 @@
 Pod::Spec.new do |s|
   s.name = 'Astrarium'
-  s.version = '1.0.0'
+  s.version = '5.0.0'
   s.summary = 'Services management library'
 
   s.homepage = 'https://github.com/netcosports/Astrarium'
-  s.license = { :type => "GNU" }
+  s.license = { :type => "MIT" }
   s.author = { 
     'Dmitry Duleba' => 'dmitryduleba@gmail.com'
   }
@@ -21,7 +21,7 @@ Pod::Spec.new do |s|
 
   # s.subspec 'CloudKit' do |sub|
   #   sub.source_files = 'Sources/CloudKit/*.swift'
-  #   sub.dependency 'Astrarium/Core'
+  #   sub.dependency 'Sources/Core'
   #   sub.framework = "CloudKit"
   # end
 
@@ -34,7 +34,7 @@ Pod::Spec.new do |s|
 
   # s.subspec 'Intents' do |sub|
   #   sub.source_files = 'Sources/Intents/*.swift'
-  #   sub.dependency 'Astrarium/Core'
+  #   sub.dependency 'Sources/Core'
   #   sub.framework = "Intents"
   # end
 

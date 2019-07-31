@@ -1,3 +1,25 @@
-PODFILE CHECKSUM: 41e1cb6bdb821f604877a374c07863ddeb73de4a
+PODS:
+  - Astrarium (5.0.0):
+    - Astrarium/Core (= 5.0.0)
+  - Astrarium/Core (5.0.0)
+  - SwiftLint (0.31.0)
 
-COCOAPODS: 1.5.2
+DEPENDENCIES:
+  - Astrarium (from `./`)
+  - SwiftLint
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - SwiftLint
+
+EXTERNAL SOURCES:
+  Astrarium:
+    :path: "./"
+
+SPEC CHECKSUMS:
+  Astrarium: bfceb17c7364cc77b2e2c8096b2292d39575e7a1
+  SwiftLint: 7a0227733d786395817373b2d0ca799fd0093ff3
+
+PODFILE CHECKSUM: e1228e3664b881c39b2ff3262503a296d58bb3c9
+
+COCOAPODS: 1.5.3

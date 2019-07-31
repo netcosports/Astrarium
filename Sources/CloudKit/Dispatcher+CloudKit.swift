@@ -6,15 +6,17 @@
 //
 
 import Foundation
+import UIKit
 import CloudKit
 
 @available(iOS 10.0, *)
 extension Dispatcher {
 
-  open func application(_ application: UIApplication,
-                        userDidAcceptCloudKitShareWith cloudKitShareMetadata: CKShareMetadata) {
+  public func application(_ application: UIApplication,
+                          userDidAcceptCloudKitShareWith cloudKitShareMetadata: CKShare.Metadata) {
     //    allServices.forEach {
     //      $0.
     //    }
   }
+
 }

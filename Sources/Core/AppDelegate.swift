@@ -12,11 +12,18 @@ import UserNotifications
 
 open class AppDelegate: UIResponder, UIApplicationDelegate {
 
-  private(set) lazy var dispatcher: Dispatcher = {
+  public var dispatcher: Dispatcher {
+    if let internalDispatcher = _internalDispatcher {
+      return internalDispatcher
+    }
+
     let dispatcher = Dispatcher(services: services)
     type(of: dispatcher).register(shared: dispatcher)
+    _internalDispatcher = dispatcher
     return dispatcher
-  }()
+  }
+
+  private var _internalDispatcher: Dispatcher?
 
   open var services: [ServiceIds?] { return [] }
 
@@ -111,6 +118,9 @@ open class AppDelegate: UIResponder, UIApplicationDelegate {
     return self.application(application, open: url, options: [:])
   }
 
+  /// parameters should be exactly (_ application: UIApplication, open url: URL,
+  /// sourceApplication: String?, annotation: Any?)
+  /// otherwise method won't be called because of its obj-c origin
   @available(iOS, introduced: 4.2, deprecated: 9.0, message: "Please use application:openURL:options:")
   open func application(_ application: UIApplication,
                         open url: URL,
@@ -340,4 +350,5 @@ open class AppDelegate: UIResponder, UIApplicationDelegate {
                         didUpdate userActivity: NSUserActivity) {
     dispatcher.appDidUpdate(userActivity: userActivity)
   }
+
 }

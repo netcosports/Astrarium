@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 extension Dispatcher: AppService {
 
@@ -247,4 +248,5 @@ extension Dispatcher: AppService {
   public func appDidUpdate(userActivity: NSUserActivity) {
     allServices.forEach { $0.appDidUpdate(userActivity: userActivity) }
   }
+
 }

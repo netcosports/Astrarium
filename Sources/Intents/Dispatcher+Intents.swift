@@ -6,16 +6,18 @@
 //
 
 import Foundation
+import UIKit
 import Intents
 
 @available(iOS 11.0, *)
 extension Dispatcher {
 
-  open func application(_ application: UIApplication,
-                        handle intent: INIntent,
-                        completionHandler: @escaping IntentResponseHandler) {
-//    allServices.forEach {
-//      $0.
-//    }
+  public func application(_ application: UIApplication,
+                          handle intent: INIntent,
+                          completionHandler: @escaping IntentResponseHandler) {
+    //    allServices.forEach {
+    //      $0.
+    //    }
   }
+
 }
