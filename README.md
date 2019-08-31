@@ -15,7 +15,7 @@ pod 'Astrarium', '~> 5.0'
 ## Main concept
 
 The main idea behind this library is to solve the following problems:
-- Make `AppDelegate` implementation is cleaner;
+- Make `AppDelegate` implementation cleaner;
 - Stop providing interface over managers/handlers as singleton object;
 
 The main concept of Astrarium is `Service`. A service is a statefull object in most of the cases. 
