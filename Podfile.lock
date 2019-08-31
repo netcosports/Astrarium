@@ -1,7 +1,7 @@
 PODS:
-  - Astrarium (5.0.0):
-    - Astrarium/Core (= 5.0.0)
-  - Astrarium/Core (5.0.0)
+  - Astrarium (5.1.0):
+    - Astrarium/Core (= 5.1.0)
+  - Astrarium/Core (5.1.0)
   - SwiftLint (0.31.0)
 
 DEPENDENCIES:
@@ -17,9 +17,9 @@ EXTERNAL SOURCES:
     :path: "./"
 
 SPEC CHECKSUMS:
-  Astrarium: bfceb17c7364cc77b2e2c8096b2292d39575e7a1
+  Astrarium: 78f23597f07a0fc05a63d65f740f62414022fe8b
   SwiftLint: 7a0227733d786395817373b2d0ca799fd0093ff3
 
 PODFILE CHECKSUM: e1228e3664b881c39b2ff3262503a296d58bb3c9
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.7.5

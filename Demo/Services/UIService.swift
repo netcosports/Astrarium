@@ -27,10 +27,10 @@ final class UIService: AppService {
     return .allButUpsideDown
   }
 
-//  func priority(for event: AppEvent) -> Priority {
-//    if event == .launch { return .high }
-//    return .default
-//  }
+  func priority(for event: AppEvent) -> Priority {
+    if event == .launch { return .high }
+    return .default
+  }
 
 }
 
