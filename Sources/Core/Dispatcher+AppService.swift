@@ -12,12 +12,17 @@ extension Dispatcher: AppService {
 
   public func appWillFinishLaunch(with options: LaunchOptions?) {
     earlyServices
+      .sortedByPriority(for: .launch)
       .forEach { $0.setup(with: options ?? [:]) }
   }
 
   public func appDidFinishLaunch(with options: LaunchOptions?) {
     lateServices
-      .forEach { $0.setup(with: options ?? [:]) }
+      .sortedByPriority(for: .launch)
+      .forEach {
+        print("\(#function) for \($0)")
+        $0.setup(with: options ?? [:])
+    }
   }
 
   public func appDidBecomeActive() {

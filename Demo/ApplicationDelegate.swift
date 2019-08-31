@@ -18,10 +18,10 @@ class ApplicationDelegate: Astrarium.AppDelegate {
 
   override var services: [ServiceIds?] {
     return [
-      .ui,
-      .remote,
       .configurableDebugService,
-      .configurableProductionService
+      .remote,
+      .configurableProductionService,
+      .ui
     ]
   }
 

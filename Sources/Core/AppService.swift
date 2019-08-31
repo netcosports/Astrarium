@@ -123,6 +123,10 @@ public protocol AppService: ServiceInitiable {
 
   func appDidUpdate(userActivity: NSUserActivity)
 
+  // MARK: - Priority
+
+  func priority(for event: AppEvent) -> Priority
+
 }
 
 // MARK: - Defaults
@@ -259,5 +263,9 @@ public extension AppService {
   func appDidFailToContinueUserActivity(with userActivityType: String, error: Error) { }
 
   func appDidUpdate(userActivity: NSUserActivity) { }
+
+  // MARK: - Priority
+
+  func priority(for event: AppEvent) -> Priority { return .default }
 
 }
