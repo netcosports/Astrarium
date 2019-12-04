@@ -15,4 +15,4 @@ public typealias VoidHandler = () -> Swift.Void
 public typealias BoolHandler = (Swift.Bool) -> Swift.Void
 public typealias BackgroundFetchResultHandler = (UIBackgroundFetchResult) -> Swift.Void
 public typealias UserInfoHandler = (UserInfo?) -> Swift.Void
-public typealias RestorationHandler = ([Any]?) -> Swift.Void
+public typealias RestorationHandler = ([UIUserActivityRestoring]?) -> Swift.Void
