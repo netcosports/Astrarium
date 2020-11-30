@@ -18,7 +18,7 @@ public class ServiceIds: Hashable {
   // MARK: - Hashable
 
   public static func == (lhs: ServiceIds, rhs: ServiceIds) -> Bool {
-    return lhs.hashValue == rhs.hashValue
+    lhs.hashValue == rhs.hashValue
   }
 
   public func hash(into hasher: inout Hasher) {
@@ -38,12 +38,13 @@ public class ServiceIdentifier<T: AppService>: ServiceIds {
   }
 
   override public func instanciateService() -> AppService {
-    print("Instanciating... \(T.self)")
+    print("Instanciating... ", terminator: "")
+    debugPrint(T.self, separator: " ", terminator: "")
     if let instance = initBlock?() {
-      print("Using init block")
+      print("... using init block")
       return instance
     }
-    print("Using default init")
+    print("... using default init")
     return T.init()
   }
 

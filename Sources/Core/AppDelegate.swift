@@ -33,6 +33,8 @@ open class AppDelegate: UIResponder, UIApplicationDelegate {
   }
 
   func setup() {
+    _ = dispatcher
+    print("Did register app services dispatcher")
     if #available(iOS 10.0, *) {
       if let delegate = self as? UNUserNotificationCenterDelegate {
         UNUserNotificationCenter.current().delegate = delegate
@@ -115,7 +117,7 @@ open class AppDelegate: UIResponder, UIApplicationDelegate {
   @available(iOS, introduced: 2.0, deprecated: 9.0, message: "Please use application:openURL:options:")
   open func application(_ application: UIApplication,
                         handleOpen url: URL) -> Bool {
-    return self.application(application, open: url, options: [:])
+    self.application(application, open: url, options: [:])
   }
 
   /// parameters should be exactly (_ application: UIApplication, open url: URL,
@@ -299,7 +301,7 @@ open class AppDelegate: UIResponder, UIApplicationDelegate {
   //swiftlint:disable line_length
   open func application(_ application: UIApplication,
                         shouldAllowExtensionPointIdentifier extensionPointIdentifier: UIApplication.ExtensionPointIdentifier) -> Bool {
-    return dispatcher.appShouldAllow(extensionPointIdentifier: extensionPointIdentifier)
+    dispatcher.appShouldAllow(extensionPointIdentifier: extensionPointIdentifier)
   }
   //swiftlint:enable line_length
 
@@ -308,15 +310,15 @@ open class AppDelegate: UIResponder, UIApplicationDelegate {
   open func application(_ application: UIApplication,
                         viewControllerWithRestorationIdentifierPath identifierComponents: [Any],
                         coder: NSCoder) -> UIViewController? {
-    return dispatcher.appViewController(with: identifierComponents, coder: coder)
+    dispatcher.appViewController(with: identifierComponents, coder: coder)
   }
 
   open func application(_ application: UIApplication, shouldSaveApplicationState coder: NSCoder) -> Bool {
-    return dispatcher.appShouldSaveApplicationState(coder: coder)
+    dispatcher.appShouldSaveApplicationState(coder: coder)
   }
 
   open func application(_ application: UIApplication, shouldRestoreApplicationState coder: NSCoder) -> Bool {
-    return dispatcher.appShouldRestoreApplicationState(coder: coder)
+    dispatcher.appShouldRestoreApplicationState(coder: coder)
   }
 
   open func application(_ application: UIApplication, willEncodeRestorableStateWith coder: NSCoder) {
@@ -331,13 +333,13 @@ open class AppDelegate: UIResponder, UIApplicationDelegate {
 
   open func application(_ application: UIApplication,
                         willContinueUserActivityWithType userActivityType: String) -> Bool {
-    return dispatcher.appWillContinueUserActivity(with: userActivityType)
+    dispatcher.appWillContinueUserActivity(with: userActivityType)
   }
 
   open func application(_ application: UIApplication,
                         continue userActivity: NSUserActivity,
                         restorationHandler: @escaping RestorationHandler) -> Bool {
-    return dispatcher.appContinue(userActivity: userActivity, restorationHandler: restorationHandler)
+    dispatcher.appContinue(userActivity: userActivity, restorationHandler: restorationHandler)
   }
 
   open func application(_ application: UIApplication,

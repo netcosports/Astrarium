@@ -16,11 +16,11 @@ final public class Dispatcher {
     .compactMap { internalService(for: $0) }
 
   internal var earlyServices: [AppService] {
-    return allServices.filter { $0.shouldSetupEarly }
+    allServices.filter { $0.shouldSetupEarly }
   }
 
   internal var lateServices: [AppService] {
-    return allServices.filter { !$0.shouldSetupEarly }
+    allServices.filter { !$0.shouldSetupEarly }
   }
 
   // MARK: - Shared
@@ -52,7 +52,7 @@ final public class Dispatcher {
   public func setup(with launchOptions: LaunchOptions) { }
 
   public func service<T: AppService>(for identifier: ServiceIdentifier<T>) -> T? {
-    return internalService(for: identifier) as? T
+    internalService(for: identifier) as? T
   }
 
   public subscript<T: AppService>(force identifier: ServiceIdentifier<T>) -> T {
@@ -63,7 +63,7 @@ final public class Dispatcher {
   }
 
   public subscript<T: AppService>(identifier: ServiceIdentifier<T>) -> T? {
-    return service(for: identifier)
+    service(for: identifier)
   }
 
 }

@@ -24,12 +24,12 @@ public extension UserNotificationsService {
 
   func handleUserNotificationsResponse(response: UNNotificationResponse, from center: UNUserNotificationCenter,
                                        with completion: @escaping VoidHandler) -> Bool {
-    return false
+    false
   }
 
   func handleUserNotificationsWillPresent(notification: UNNotification, from center: UNUserNotificationCenter,
                                           with completion: @escaping NotificationPresentationOptionsHandler) -> Bool {
-    return false
+    false
   }
 
 }

@@ -24,7 +24,7 @@ final class UIService: AppService {
   }
 
   func appInterfaceOrientationMask(for window: UIWindow?) -> UIInterfaceOrientationMask {
-    return .allButUpsideDown
+    .allButUpsideDown
   }
 
 }
