@@ -17,7 +17,7 @@ var Services: Dispatcher {
 class ApplicationDelegate: Astrarium.AppDelegate {
 
   override var services: [ServiceIds?] {
-    return [
+    [
       .ui,
       .remote,
       .configurableDebugService,

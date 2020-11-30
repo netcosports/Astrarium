@@ -148,13 +148,13 @@ public extension AppService {
   // MARK: - App Orientation
 
   func appInterfaceOrientationMask(for window: UIWindow?) -> UIInterfaceOrientationMask {
-    return UIInterfaceOrientationMask(rawValue: 0)
+    UIInterfaceOrientationMask(rawValue: 0)
   }
 
   // MARK: - URLs
 
   func handle(url: URL, with options: OpenURLOptions = [:]) -> Bool {
-    return false
+    false
   }
 
   // MARK: - Status bar
@@ -225,21 +225,21 @@ public extension AppService {
   // MARK: - Extensions
 
   func appShouldAllow(extensionPointIdentifier: UIApplication.ExtensionPointIdentifier) -> Bool {
-    return true
+    true
   }
 
   // MARK: - Restoration
 
   func appViewController(with restorationIdentifierComponents: [Any], coder: NSCoder) -> UIViewController? {
-    return nil
+    nil
   }
 
   func appShouldSaveApplicationState(coder: NSCoder) -> Bool {
-    return false
+    false
   }
 
   func appShouldRestoreApplicationState(coder: NSCoder) -> Bool {
-    return false
+    false
   }
 
   func appWillEncodeRestorableState(with coder: NSCoder) { }
@@ -249,11 +249,11 @@ public extension AppService {
   // MARK: - User Activity
 
   func appWillContinueUserActivity(with userActivityType: String) -> Bool {
-    return false
+    false
   }
 
   func appContinue(userActivity: NSUserActivity, restorationHandler: @escaping RestorationHandler) -> Bool {
-    return false
+    false
   }
 
   func appDidFailToContinueUserActivity(with userActivityType: String, error: Error) { }
