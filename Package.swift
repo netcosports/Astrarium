@@ -10,9 +10,8 @@ let package = Package(
     products: [
       .library(name: "AstrariumCore", targets: ["AstrariumCore"])
     ],
-    dependencies: [],
     targets: [
-      .target(name: "AstrariumCore", dependencies: [], path: "./Sources/Core")
+      .target(name: "AstrariumCore", path: "./Sources/Core")
     ],
     swiftLanguageVersions: [.v5]
 )
