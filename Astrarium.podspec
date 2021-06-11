@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name = 'Astrarium'
-  s.version = '6.0'
+  s.version = '6.0.0'
   s.summary = 'Services management library'
 
   s.homepage = 'https://github.com/netcosports/Astrarium'
