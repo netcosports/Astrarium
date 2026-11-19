@@ -1,17 +1,23 @@
-// swift-tools-version:5.1
+// swift-tools-version:5.9
 
 import PackageDescription
 
 let package = Package(
     name: "Astrarium",
     platforms: [
-      .iOS(.v9)
+      .iOS(.v15)
     ],
     products: [
-      .library(name: "AstrariumCore", targets: ["AstrariumCore"])
+      .library(name: "Astrarium", targets: ["Astrarium"])
     ],
     targets: [
-      .target(name: "AstrariumCore", path: "./Sources/Core")
+      .target(
+        name: "Astrarium",
+        path: "./Sources/Core",
+        linkerSettings: [
+          .linkedFramework("UIKit", .when(platforms: [.iOS])),
+        ]
+      )
     ],
     swiftLanguageVersions: [.v5]
 )
